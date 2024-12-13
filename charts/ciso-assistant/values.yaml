@@ -6,6 +6,9 @@ global:
   # Override appVersion from Chart.yaml if needed
   appVersion: "v1.9.3" # When empty, will use Chart.yaml's appVersion
 
+secret:
+  enabled: true
+
 email:
   defaultFrom: no-reply@ciso-assistant.net
   debug: false
@@ -35,6 +38,7 @@ image:
     tag: "{{ default .Chart.AppVersion .Values.global.appVersion }}"
     pullPolicy: Always
   caddy:
+    enabled: true
     repository: caddy
     tag: "2.7.6"
     pullPolicy: IfNotPresent
@@ -42,3 +46,6 @@ image:
 persistence:
   size: 5Gi
   accessMode: ReadWriteOnce
+
+ingress:
+  ingressClassName: nginx

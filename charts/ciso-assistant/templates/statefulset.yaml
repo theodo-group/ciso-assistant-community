@@ -64,6 +64,7 @@ spec:
         ports:
         - containerPort: 3000
           protocol: TCP
+{{- if .Values.image.caddy.enabled }}
       - name: caddy
         command:
         - sh
@@ -90,6 +91,7 @@ spec:
         - mountPath: /data
           name: db-data
           subPath: caddy
+{{- end }}
       enableServiceLinks: false
       imagePullSecrets:
       - name: registry-secret
